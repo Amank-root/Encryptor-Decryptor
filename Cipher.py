@@ -18,16 +18,16 @@ def encrypt(text, s):
     for i in range(len(text)):
         char = text[i]
        # Encrypt uppercase characters in plain text
-
         if (char.isupper()):
             result += chr((ord(char) + s-65) % 26 + 65)
+        # Space Error Resolved.
+        elif (char == " "):
+            result += char
         # Encrypt lowercase characters in plain text
         else:
             result += chr((ord(char) + s - 97) % 26 + 97)
             
     return result
-    # return result.replace('r', '_')  # try some other spacing technique.
-    # check the above function
 
 
                         # Casear Cipher Decryptor (LoadUp Process)
@@ -61,9 +61,12 @@ def cipher_decrypt(ciphertext, key):
             decrypted += c_og
 
         elif c.isdigit():
-
+            # Space Error Resolved.
+            if (c == " "):
+                c_og += c
             # if it's a number,shift its actual value 
-            c_og = (int(c) - key) % 10
+            else:
+                c_og += (int(c) - key) % 10
 
             decrypted += str(c_og)
 
@@ -72,8 +75,7 @@ def cipher_decrypt(ciphertext, key):
             # if its neither alphabetical nor a number, just leave it like that
             decrypted += c
 
-    return decrypted.replace("n", " ")
-    # return decrypted
+    return decrypted
 
 Get_The_Value = input("What Do You Want To Do: ")
 print(end="\n")
@@ -94,11 +96,11 @@ elif Get_The_Value == "2":
 
     print ("Cipher Text : " + text_Transfered)
     print ("Shift Key : " + str(s))
-    print ("Cipher: " + cipher_decrypt(text_Transfered, s)) #Executing The Decryptor
+    print ("Plain Text: " + cipher_decrypt(text_Transfered, s)) #Executing The Decryptor
 else:
     print("Invalid Input", "\n")
     exit()
 
 
 
-                                                                            # The End
+                                                # The End
