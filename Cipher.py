@@ -77,6 +77,20 @@ def cipher_decrypt(ciphertext, key):
 
     return decrypted
 
+def custom_encrypt(text, s):
+    encryted = ""
+    list_encrypt = []
+    start = ord('a')
+    for l, k in zip(text, s):
+        if l == " ":
+            list_encrypt.append(l)
+        else:
+            shift = ord(k) - start
+            addlist = start + (ord(l) - start + shift) % 26
+            list_encrypt.append(chr(addlist))
+    encryted = "".join(list_encrypt)
+    return encryted
+
 Get_The_Value = input("What Do You Want To Do: ")
 print(end="\n")
 
@@ -97,6 +111,17 @@ elif Get_The_Value == "2":
     print ("Cipher Text : " + text_Transfered)
     print ("Shift Key : " + str(s))
     print ("Plain Text: " + cipher_decrypt(text_Transfered, s)) #Executing The Decryptor
+
+elif Get_The_Value == "3":
+    text_before_decrytion = input("Enter Text To Decrypt: ")
+    text_Transfered = text_before_decrytion
+    s = input("Enter Shift Value: ")
+
+    print("plain Text : " + text_Transfered)
+    print("Key : ", str(s))
+    # Custom Key Encryption
+    print("Cipher: " + custom_encrypt(text_Transfered, s))
+
 else:
     print("Invalid Input", "\n")
     exit()
